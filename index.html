@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#5b3df5">
+<meta name="description" content="Quizora : quiz éducatifs gratuits en français. Apprends, joue et progresse !">
+<title>Quizora – Apprends, joue et progresse !</title>
+<style>
+:root{--ink:#1c1b3a;--v:#5b3df5;--y:#ffc93c;--bg:#f6f4ff;--ok:#12a150;--ko:#e5484d;--m:#5f5e7a}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink)}
+button{font-family:inherit;color:inherit;cursor:pointer;touch-action:manipulation}
+:focus-visible{outline:3px solid var(--y);outline-offset:2px}
+.top{background:var(--v);padding:10px 16px;padding-top:calc(10px + env(safe-area-inset-top,0px))}
+.logo{display:flex;align-items:center;gap:10px;background:none;border:0;color:#fff;font-size:20px;font-weight:900;letter-spacing:1px;padding:4px 0;min-height:44px}
+.badge{position:relative;width:38px;height:38px;border-radius:12px;background:#fff;color:var(--v);border:2px solid var(--ink);display:grid;place-items:center;font-size:24px;font-weight:900;line-height:1}
+.badge::after{content:"";position:absolute;right:-5px;bottom:-5px;width:12px;height:12px;border-radius:50%;background:var(--y);border:2px solid var(--ink)}
+main{max-width:560px;margin:0 auto;padding:16px 16px 110px}
+h1,h2,h3{line-height:1.2;margin:0}
+h2{font-size:22px;margin:8px 0 12px}
+h3{font-size:17px;margin:14px 0 4px}
+p{margin:6px 0}
+.muted{color:var(--m);font-size:14px}
+.card,.cat,.opt,.fb{background:#fff;border:2px solid var(--ink);border-radius:16px;box-shadow:0 4px 0 var(--ink)}
+.card{padding:4px 16px 14px;margin-bottom:14px}
+.hero{text-align:center;padding:4px 0 8px}
+.hero .badge{width:76px;height:76px;border-radius:24px;font-size:48px;margin:0 auto 14px;box-shadow:0 5px 0 var(--ink)}
+.hero .badge::after{width:24px;height:24px;right:-8px;bottom:-8px}
+.hero h1{font-size:36px;font-weight:900;letter-spacing:2px}
+.slogan{font-size:19px;font-weight:700;color:var(--v);margin-top:6px}
+.cat{display:flex;align-items:center;gap:14px;width:100%;min-height:80px;padding:12px 14px;margin:0 0 16px;text-align:left}
+.cat:active,.opt:active:not(:disabled),.btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--ink)}
+.ico{flex:none;width:52px;height:52px;border-radius:14px;border:2px solid var(--ink);background:var(--k);display:grid;place-items:center;font-size:28px}
+.txt{flex:1}.txt b{display:block;font-size:17px}.txt small{color:var(--m);font-size:14px}
+.go{font-size:28px;font-weight:900}
+.btn{display:block;width:100%;min-height:56px;margin-top:16px;border:2px solid var(--ink);border-radius:16px;background:var(--v);color:#fff;font-size:18px;font-weight:800;box-shadow:0 4px 0 var(--ink)}
+.btn.sec{background:#fff;color:var(--ink)}
+#suiv{scroll-margin-bottom:calc(88px + env(safe-area-inset-bottom,0px))}
+.qhead{display:flex;justify-content:space-between;align-items:center;gap:8px;font-weight:700}
+.lien{background:none;border:0;min-height:44px;padding:0 4px;font-weight:700;color:var(--m)}
+.prog{height:12px;border:2px solid var(--ink);border-radius:8px;background:#fff;overflow:hidden}
+.prog i{display:block;height:100%;background:var(--y);transition:width .3s}
+.num{margin:10px 0 0;font-size:14px;color:var(--m);font-weight:700}
+.q{font-size:22px;margin:8px 0 14px}
+.opt{display:flex;align-items:center;gap:12px;width:100%;min-height:58px;padding:10px 14px;margin:0 0 12px;text-align:left;font-size:17px}
+.opt b{flex:none;width:32px;height:32px;border-radius:50%;border:2px solid var(--ink);display:grid;place-items:center;font-size:15px;background:var(--bg)}
+.opt:disabled{cursor:default;color:var(--ink)}
+.opt.ok{background:#dcf5e6;border-color:var(--ok)}.opt.ok b{background:var(--ok);color:#fff;border-color:var(--ok)}
+.opt.ko{background:#fde4e4;border-color:var(--ko)}.opt.ko b{background:var(--ko);color:#fff;border-color:var(--ko)}
+.fb{padding:12px 16px;margin-top:4px}
+.fb.ok{border-left:10px solid var(--ok)}.fb.ko{border-left:10px solid var(--ko)}
+.fb h3{margin-top:0}
+.res{text-align:center}
+.cercle{width:160px;height:160px;border-radius:50%;margin:14px auto;border:2px solid var(--ink);background:conic-gradient(var(--v) calc(var(--pc)*1%),#fff 0);display:grid;place-items:center}
+.cercle span{width:118px;height:118px;border-radius:50%;background:#fff;border:2px solid var(--ink);display:grid;place-items:center;font-size:34px;font-weight:900}
+.rec{display:inline-block;background:var(--y);border:2px solid var(--ink);border-radius:12px;padding:4px 12px;font-weight:800}
+.score{display:flex;align-items:center;gap:12px;padding:12px 16px}
+.score .ico{width:44px;height:44px;font-size:22px}
+nav{position:fixed;left:0;right:0;bottom:0;display:grid;grid-template-columns:repeat(4,1fr);background:#fff;border-top:2px solid var(--ink);padding-bottom:env(safe-area-inset-bottom,0px)}
+nav button{background:none;border:0;min-height:62px;font-size:22px;line-height:1.1;padding:6px 2px}
+nav span{display:block;font-size:12px;font-weight:700;color:var(--m)}
+nav button.on span{color:var(--v)}
+nav button.on{box-shadow:inset 0 4px 0 var(--v)}
+.pub[hidden]{display:none}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header class="top"><button class="logo" id="home" aria-label="Retour à l'accueil"><span class="badge">Q</span>QUIZORA</button></header>
+<main id="app"><noscript>Quizora a besoin de JavaScript pour fonctionner. Active-le dans ton navigateur.</noscript></main>
+
+<!-- ESPACE PUBLICITAIRE FUTUR : vide et masqué. Aucune publicité n'est installée.
+     Plus tard : colle ici le code fourni par la régie publicitaire, retire l'attribut hidden,
+     puis mets à jour la page « Confidentialité » (cookies et services publicitaires). -->
+<aside class="pub" id="espace-pub" aria-label="Espace publicitaire" hidden></aside>
+
+<nav aria-label="Navigation principale">
+<button data-v="accueil">🏠<span>Accueil</span></button>
+<button data-v="scores">🏆<span>Scores</span></button>
+<button data-v="apropos">ℹ️<span>À propos</span></button>
+<button data-v="confidentialite">🔒<span>Confidentialité</span></button>
+</nav>
+
+<script>
+/* Format d'une question : [énoncé, BONNE réponse, mauvaise 1, mauvaise 2, mauvaise 3, explication]
+   L'ordre des 4 réponses est mélangé à chaque affichage. */
+const CATS=[
+{id:"culture",nom:"Culture générale",ico:"🌍",k:"#ffc93c",q:[
+["Quelle est la capitale de l'Australie ?","Canberra","Sydney","Melbourne","Perth","Canberra a été choisie en 1908, en compromis entre Sydney et Melbourne."],
+["Quel est le plus long fleuve d'Afrique ?","Le Nil","Le Congo","Le Niger","Le Zambèze","Le Nil mesure environ 6 650 km."],
+["Qui a peint la Joconde ?","Léonard de Vinci","Michel-Ange","Raphaël","Botticelli","Elle date du début du XVIe siècle et se trouve au Louvre."],
+["En quelle année a débuté la Révolution française ?","1789","1689","1799","1815","La prise de la Bastille eut lieu le 14 juillet 1789."],
+["Quel est le plus grand océan du monde ?","Le Pacifique","L'Atlantique","L'océan Indien","L'Arctique","Il couvre environ un tiers de la surface de la Terre."],
+["Quelle est la monnaie du Japon ?","Le yen","Le yuan","Le won","Le ringgit","Le yuan est chinois et le won est coréen."],
+["Quel est le plus petit pays du monde ?","Le Vatican","Monaco","Saint-Marin","Le Liechtenstein","Le Vatican couvre environ 0,44 km²."],
+["Quelle ville est surnommée la « Ville Lumière » ?","Paris","Lyon","Marseille","Bruxelles","Ce surnom évoque le siècle des Lumières et l'éclairage précoce de la ville."],
+["Quel est le plus haut sommet du monde ?","L'Everest","Le K2","Le Mont Blanc","Le Kilimandjaro","Il culmine à environ 8 849 m, dans l'Himalaya."],
+["Qui a écrit « Les Misérables » ?","Victor Hugo","Émile Zola","Alexandre Dumas","Honoré de Balzac","Ce roman a été publié en 1862."],
+["Combien de joueurs une équipe de football aligne-t-elle sur le terrain ?","11","9","10","12","Onze joueurs, gardien de but compris."],
+["Quel est le pays le plus vaste du monde ?","La Russie","Le Canada","La Chine","Les États-Unis","La Russie dépasse 17 millions de km²."],
+["Dans quel pays se trouve le Machu Picchu ?","Le Pérou","Le Mexique","La Bolivie","La Colombie","Cette cité inca est perchée dans les Andes."],
+["Quelle organisation de 193 États membres siège à New York ?","L'ONU","L'UNESCO","L'OTAN","L'OMC","L'UNESCO siège à Paris, l'OTAN à Bruxelles, l'OMC à Genève."],
+["Combien de touches compte un piano standard ?","88","76","92","100","Il compte 52 touches blanches et 36 noires, soit 88."],
+["Quelle est la capitale du Sénégal ?","Dakar","Abidjan","Bamako","Conakry","Dakar se trouve sur la presqu'île du Cap-Vert."],
+["Quel pays a offert la statue de la Liberté aux États-Unis ?","La France","Le Royaume-Uni","L'Espagne","L'Italie","Elle a été inaugurée en 1886, symbole d'amitié entre les deux pays."],
+["Combien de jours compte une année bissextile ?","366","365","364","367","Le 29 février rattrape le décalage avec l'année solaire."],
+["Quelle langue compte le plus de locuteurs natifs ?","Le mandarin","L'anglais","L'espagnol","L'hindi","Le mandarin devance l'espagnol et l'anglais."],
+["Quelle est la capitale de la République du Congo ?","Brazzaville","Kinshasa","Pointe-Noire","Libreville","Kinshasa est la capitale de la RDC, sur l'autre rive du fleuve."]
+]},
+{id:"francais",nom:"Français",ico:"📚",k:"#ff8fa3",q:[
+["Quel est le féminin de « acteur » ?","actrice","acteuse","actrisse","actère","Beaucoup de noms en -teur font -trice au féminin."],
+["Quel est le pluriel de « cheval » ?","chevaux","chevals","chevaus","chevales","Les noms en -al font en général -aux."],
+["Complète : « Tu ___ raison. »","as","a","à","ah","« as » est le verbe avoir ; on peut dire « tu avais »."],
+["Complète : « ___ chien aboie. »","Ce","Se","Ceux","Sé","« Ce » est un déterminant démonstratif devant un nom."],
+["Quel mot est un synonyme de « rapide » ?","véloce","lent","paisible","tardif","« Véloce » veut dire qui va très vite."],
+["Quel est le contraire de « généreux » ?","avare","prodigue","aimable","riche","« Prodigue » est plutôt proche de « généreux »."],
+["Quelle est la nature de « rapidement » ?","un adverbe","un adjectif","un nom","un verbe","Il est invariable : il court rapidement."],
+["« Manger » à l'imparfait avec « nous » :","nous mangions","nous mangeons","nous mangiions","nous mangeions","Le « e » se garde devant a ou o, pas devant i."],
+["Complète : « Les fleurs que j'ai ___ sont belles. »","cueillies","cueilli","cueillis","cueillit","Le COD « que » (fleurs) est placé avant : accord au féminin pluriel."],
+["Quelle figure de style est « fort comme un lion » ?","Une comparaison","Une métaphore","Une antithèse","Une litote","Elle utilise l'outil de comparaison « comme »."],
+["Quel est le participe passé de « résoudre » ?","résolu","résout","résoulu","résolvé","On dit : « Le problème est résolu »."],
+["Quelle orthographe est correcte ?","développement","dévelopement","développment","dévellopement","Développer prend deux « p »."],
+["Quelle phrase est au futur simple ?","Je chanterai demain.","Je chantais hier.","Je chante maintenant.","J'ai chanté hier.","La terminaison -erai marque le futur simple."],
+["Dans « Marie lit un livre », quelle est la fonction de « un livre » ?","un COD","un sujet","un COI","un attribut","Marie lit quoi ? Un livre : complément d'objet direct."],
+["Qui a écrit « Le Petit Prince » ?","Antoine de Saint-Exupéry","Albert Camus","Victor Hugo","Guy de Maupassant","Ce conte a été publié en 1943."],
+["Combien de syllabes compte « ordinateur » ?","4","3","5","6","Or-di-na-teur."],
+["Quel mode est employé dans « Il faut que tu viennes » ?","Le subjonctif","L'indicatif","Le conditionnel","L'impératif","« Il faut que » est suivi du subjonctif."],
+["Que signifie « avoir le cafard » ?","Être triste","Être joyeux","Avoir peur","Avoir faim","C'est une expression imagée qui désigne la tristesse."],
+["Quel est le pluriel de « bijou » ?","bijoux","bijous","bijouts","bijouxs","Sept noms en -ou prennent un x : bijou, chou, genou, hibou, joujou, caillou, pou."],
+["Quel mot est un pronom personnel ?","nous","table","rouge","vite","« Nous » remplace un groupe de personnes."]
+]},
+{id:"marketing",nom:"Marketing et gestion commerciale",ico:"📈",k:"#9fe6d0",q:[
+["Quels sont les « 4 P » du marketing mix ?","Produit, Prix, Place, Promotion","Produit, Profit, Personnel, Public","Prix, Publicité, Partenaire, Plan","Production, Prix, Palmarès, Promotion","Ce sont les quatre leviers de l'offre."],
+["À quoi sert une étude de marché ?","À connaître clients, concurrents et demande","À calculer la TVA","À embaucher du personnel","À fabriquer le produit","Elle réduit le risque avant un lancement."],
+["Que représente le chiffre d'affaires ?","Le total des ventes sur une période","Le bénéfice net","L'ensemble des charges","L'argent en banque","Il ne tient pas compte des coûts."],
+["Comment calcule-t-on la marge commerciale ?","Prix de vente HT − coût d'achat HT","Prix d'achat + TVA","Chiffre d'affaires − impôts","Prix de vente × quantité","Vendu 150 pour un achat à 100 : marge de 50."],
+["Que désigne la « cible » en marketing ?","Le groupe de clients visé","Un objectif de bénéfice","Le principal concurrent","Le lieu de vente","Elle guide le produit, le prix et la communication."],
+["Que permet d'analyser une matrice SWOT ?","Forces, faiblesses, opportunités, menaces","Salaires et primes","Stocks et livraisons","Taxes et impôts","Forces et faiblesses sont internes, le reste vient de l'environnement."],
+["Quand une entreprise atteint-elle son seuil de rentabilité ?","Quand son chiffre d'affaires couvre toutes ses charges","Quand son stock est vide","Quand elle ne paie plus d'impôts","Quand ses ventes doublent","Le résultat est alors nul : ni perte, ni bénéfice."],
+["La part de marché relative compare sa part de marché à celle…","du principal concurrent","du marché mondial","de la moyenne des clients","du dernier arrivé","Au-dessus de 1, l'entreprise devance son principal concurrent."],
+["Que signifie « fidéliser » un client ?","L'encourager à racheter régulièrement","Lui vendre une seule fois","Lui faire payer d'avance","Lui proposer toujours le même prix","Garder un client coûte souvent moins cher que d'en conquérir un."],
+["Quel document détaille le prix proposé avant l'achat ?","Le devis","La facture","Le relevé bancaire","Le bon de livraison","Le devis est une offre de prix, la facture suit la vente."],
+["Que signifie « B2C » ?","Business to Consumer (vente aux particuliers)","Business to Business (vente entre entreprises)","Back to Customer (retour client)","Buy to Cash (achat comptant)","Le B2B s'adresse aux entreprises."],
+["Comment obtient-on un prix TTC ?","Prix HT × (1 + taux de TVA)","Prix HT − TVA","Prix HT ÷ taux de TVA","Prix HT + marge","À 20 % de TVA : 100 × 1,20 = 120 € TTC."],
+["Que désigne le positionnement d'un produit ?","Sa place dans l'esprit des clients face aux concurrents","Son emplacement en rayon","Son coût de fabrication","Sa date de lancement","Une marque peut se positionner économique ou haut de gamme."],
+["Quel est un exemple de distribution directe ?","Vendre sur le site de la marque","Passer par un grossiste","Passer par une centrale d'achat","Passer par un importateur","Aucun intermédiaire entre producteur et client."],
+["À quoi sert un stock de sécurité ?","À éviter la rupture en cas d'imprévu","À augmenter les prix","À réduire les impôts","À remplacer l'inventaire","Il couvre les retards ou les pics de demande."],
+["Quel est l'objectif principal de la publicité ?","Faire connaître l'offre et donner envie d'acheter","Calculer le prix de revient","Gérer les stocks","Recruter des salariés","Elle relève du levier « Promotion »."],
+["Comment nomme-t-on un client potentiel qui n'a pas encore acheté ?","Un prospect","Un fournisseur","Un concurrent","Un actionnaire","La prospection vise à les transformer en clients."],
+["Quel est l'ordre des phases du cycle de vie d'un produit ?","Lancement, croissance, maturité, déclin","Croissance, lancement, déclin, maturité","Maturité, lancement, croissance, déclin","Déclin, maturité, croissance, lancement","Chaque phase demande une stratégie différente."],
+["À quoi sert un budget prévisionnel ?","À prévoir recettes et dépenses à venir","À enregistrer les ventes passées","À payer les salaires","À déclarer les impôts","Il aide à anticiper les besoins de financement."],
+["Que mesure le taux de conversion d'un site web ?","La part de visiteurs qui font l'action souhaitée","Le nombre de pages vues","La vitesse de chargement","Le prix moyen du panier","5 achats pour 100 visiteurs : taux de 5 %."]
+]},
+{id:"sciences",nom:"Sciences et technologies",ico:"🔬",k:"#b9a8ff",q:[
+["Quelle est la formule chimique de l'eau ?","H₂O","CO₂","O₂","NaCl","Deux atomes d'hydrogène et un d'oxygène."],
+["Quelle planète est la plus proche du Soleil ?","Mercure","Vénus","Mars","La Terre","Mercure fait le tour du Soleil en 88 jours."],
+["Quel gaz les plantes absorbent-elles pour la photosynthèse ?","Le dioxyde de carbone","L'oxygène","L'azote","L'hydrogène","Avec la lumière, elles fabriquent des sucres et rejettent de l'oxygène."],
+["Combien d'os compte le squelette d'un adulte ?","206","150","256","306","Un nouveau-né en a plus : certains os se soudent en grandissant."],
+["Que signifie « RAM » en informatique ?","Mémoire vive","Mémoire morte","Disque dur","Carte graphique","La RAM (Random Access Memory) se vide à l'extinction."],
+["Dans quelle unité mesure-t-on une force ?","Le newton","Le joule","Le watt","Le pascal","L'unité porte le nom d'Isaac Newton."],
+["Quelle est la vitesse de la lumière dans le vide ?","Environ 300 000 km/s","Environ 30 000 km/s","Environ 1 000 000 km/s","Environ 340 m/s","340 m/s est à peu près la vitesse du son dans l'air."],
+["Quel organe pompe le sang dans le corps ?","Le cœur","Le foie","Le rein","Le poumon","Ses contractions envoient le sang dans tout l'organisme."],
+["Quel est le symbole chimique de l'or ?","Au","Or","Ag","Fe","Au vient du latin « aurum » ; Ag est l'argent."],
+["Quelle planète est surnommée la « planète rouge » ?","Mars","Jupiter","Vénus","Saturne","Sa couleur vient de l'oxyde de fer en surface."],
+["Quel système libre repose sur le noyau créé par Linus Torvalds ?","Linux","Windows","macOS","iOS","Le noyau Linux date de 1991 ; Android en est dérivé."],
+["Combien de bits contient un octet ?","8","4","10","16","Un octet représente 256 valeurs (2⁸)."],
+["Qui a formulé la théorie de la relativité ?","Albert Einstein","Isaac Newton","Louis Pasteur","Galilée","Relativité restreinte en 1905, générale en 1915."],
+["Que devient l'eau liquide à 100 °C au niveau de la mer ?","Elle bout et devient vapeur","Elle gèle","Elle devient solide","Elle perd son hydrogène","100 °C est sa température d'ébullition."],
+["Laquelle de ces énergies est renouvelable ?","L'énergie solaire","Le charbon","Le pétrole","Le gaz naturel","Les énergies fossiles ne se renouvellent pas à l'échelle humaine."],
+["Quel est le rôle principal des globules rouges ?","Transporter l'oxygène","Combattre les infections","Faire coaguler le sang","Digérer les aliments","Leur hémoglobine fixe l'oxygène."],
+["Que signifie « HTML » ?","HyperText Markup Language","High Tech Modern Language","Home Tool Making Language","HyperTransfer Machine Link","C'est le langage qui structure les pages web."],
+["Qui a mis au point le vaccin contre la rage, testé en 1885 ?","Louis Pasteur","Marie Curie","Alexander Fleming","Charles Darwin","Pasteur l'a administré pour la première fois à un humain en 1885."],
+["Quelle couche de l'atmosphère absorbe une grande partie des UV ?","La couche d'ozone","La troposphère","L'exosphère","La couche de nuages","L'ozone se situe dans la stratosphère."],
+["Quel composant conserve les fichiers de façon durable ?","Le disque de stockage (disque dur ou SSD)","La mémoire vive (RAM)","Le processeur","La carte son","Contrairement à la RAM, il garde les données hors tension."]
+]}
+];
+
+const N=10,KEY="quizora_scores_v1";
+const $=s=>document.querySelector(s),app=$("#app");
+let etat=null;
+const melange=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const lire=()=>{try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return{}}};
+const ecrire=o=>{try{localStorage.setItem(KEY,JSON.stringify(o));return true}catch(e){return false}};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function accueil(){const sc=lire();
+app.innerHTML=`<section class="hero"><div class="badge">Q</div><h1>QUIZORA</h1><p class="slogan">Apprends, joue et progresse !</p></section>
+<h2>Choisis une catégorie</h2>`+CATS.map(c=>`<button class="cat" data-c="${c.id}"><span class="ico" style="--k:${c.k}">${c.ico}</span><span class="txt"><b>${c.nom}</b><small>${N} questions par partie${sc[c.id]?", meilleur score : "+sc[c.id].pct+" %":""}</small></span><span class="go">›</span></button>`).join("");
+app.querySelectorAll(".cat").forEach(b=>b.onclick=()=>demarrer(b.dataset.c))}
+
+function demarrer(id){const c=CATS.find(x=>x.id===id);if(etatNav()!=="quiz")pousser("quiz");
+etat={c,qs:melange(c.q).slice(0,N).map(a=>({t:a[0],b:a[1],o:melange(a.slice(1,5)),e:a[5]})),i:0,s:0,rep:false};
+question()}
+
+function question(){const{c,qs,i}=etat,q=qs[i];etat.rep=false;
+app.innerHTML=`<div class="qhead"><button class="lien" id="quit">✕ Quitter</button><span>${c.nom}</span></div>
+<div class="prog"><i style="width:${i/qs.length*100}%"></i></div>
+<p class="num">Question ${i+1} sur ${qs.length} – Score : ${etat.s}</p>
+<h2 class="q">${esc(q.t)}</h2>`+q.o.map((o,k)=>`<button class="opt" data-k="${k}"><b>${"ABCD"[k]}</b><span>${esc(o)}</span></button>`).join("")+`<div id="fb"></div>`;
+$("#quit").onclick=()=>{if(confirm("Quitter ce quiz ? Ta progression sera perdue."))aller("accueil")};
+app.querySelectorAll(".opt").forEach(b=>b.onclick=()=>repondre(+b.dataset.k));window.scrollTo(0,0)}
+
+function repondre(k){if(etat.rep)return;etat.rep=true;
+const q=etat.qs[etat.i],ok=q.o[k]===q.b,der=etat.i===etat.qs.length-1;
+if(ok)etat.s++;
+app.querySelectorAll(".opt").forEach((b,j)=>{b.disabled=true;if(q.o[j]===q.b)b.classList.add("ok");else if(j===k)b.classList.add("ko")});
+$("#fb").innerHTML=`<div class="fb ${ok?"ok":"ko"}" role="status"><h3>${ok?"✅ Bonne réponse !":"❌ Mauvaise réponse"}</h3>${ok?"":`<p>Bonne réponse : <b>${esc(q.b)}</b></p>`}<p>💡 ${esc(q.e)}</p></div><button class="btn" id="suiv">${der?"Voir mon résultat":"Question suivante"}</button>`;
+$("#suiv").onclick=()=>{etat.i++;der?resultat():question()};
+$("#suiv").scrollIntoView({block:"nearest"})}
+
+function resultat(){const{c,qs,s}=etat,pct=Math.round(s/qs.length*100),sc=lire(),prev=sc[c.id],record=!prev||pct>prev.pct;
+let saved=true;
+if(record){sc[c.id]={pct,score:s,total:qs.length,date:new Date().toLocaleDateString("fr-FR")};saved=ecrire(sc)}
+const msg=pct>=80?"Excellent travail ! 🎉":pct>=50?"Bien joué, continue ! 👍":"Rejoue pour progresser, tu vas y arriver ! 💪";
+app.innerHTML=`<section class="res"><p class="muted">${esc(c.nom)}</p><div class="cercle" style="--pc:${pct}"><span>${pct} %</span></div><h2>${s} sur ${qs.length} bonnes réponses</h2><p>${msg}</p>${record?`<p class="rec">🏆 Nouveau meilleur score !</p>`:`<p class="muted">Meilleur score : ${prev.pct} %</p>`}${saved?"":`<p class="muted">⚠️ Score non enregistré : le stockage du navigateur est indisponible (navigation privée ?).</p>`}</section>
+<button class="btn" id="rej">🔄 Recommencer</button><button class="btn sec" id="acc">Changer de catégorie</button>`;
+$("#rej").onclick=()=>demarrer(c.id);$("#acc").onclick=()=>aller("accueil");window.scrollTo(0,0)}
+
+function scores(){const sc=lire();
+app.innerHTML=`<h2>🏆 Meilleurs scores</h2>`+CATS.map(c=>{const r=sc[c.id];return `<div class="card score"><span class="ico" style="--k:${c.k}">${c.ico}</span><div><b>${c.nom}</b><br>${r?`${r.pct} % (${r.score} sur ${r.total}), le ${r.date}`:`<span class="muted">Pas encore joué</span>`}</div></div>`}).join("")+`<button class="btn sec" id="raz">Effacer mes scores</button><p class="muted">Les scores sont enregistrés uniquement sur cet appareil, dans ce navigateur.</p>`;
+$("#raz").onclick=()=>{if(confirm("Effacer tous les meilleurs scores ?")){try{localStorage.removeItem(KEY)}catch(e){}scores()}}}
+
+function apropos(){const n=CATS.reduce((t,c)=>t+c.q.length,0);
+app.innerHTML=`<h2>À propos</h2><div class="card"><h3>Quizora</h3><p>Quizora est une application de quiz éducatifs en français. Son slogan : <i>Apprends, joue et progresse !</i></p><h3>Contenu</h3><p>4 catégories (culture générale, français, marketing et gestion commerciale, sciences et technologies) et ${n} questions originales. Chaque réponse est suivie d'une explication.</p><h3>Utilisation</h3><p>Gratuite, sans compte, directement dans le navigateur.</p><p class="muted">Version 1.0. Les explications sont données à titre pédagogique : en cas de doute, vérifie dans tes cours.</p></div>`}
+
+function confidentialite(){
+app.innerHTML=`<h2>Confidentialité</h2><div class="card"><h3>Aucune donnée personnelle</h3><p>Quizora ne demande ni nom, ni e-mail, ni compte, et n'envoie aucune donnée à un serveur.</p><h3>Stockage sur ton appareil</h3><p>Seuls tes meilleurs scores sont enregistrés, dans le stockage local de ton navigateur. Tu peux les effacer depuis la page Scores ou en vidant les données du site.</p><h3>Pas de suivi</h3><p>L'application n'utilise ni cookie de suivi, ni outil d'analyse, ni service tiers.</p><h3>Hébergement</h3><p>Le service qui héberge le site peut conserver des journaux techniques standards (par exemple l'adresse IP), indépendamment de l'application.</p><h3>Publicité</h3><p>Aucune publicité n'est affichée actuellement. Si cela change, cette page sera mise à jour avant.</p></div>`}
+
+const vues={accueil,scores,apropos,confidentialite};
+const etatNav=()=>{try{return history.state&&history.state.v}catch(e){return null}};
+const pousser=v=>{try{history.pushState({v},"")}catch(e){}};
+function aller(v,push=true){if(push&&etatNav()!==v)pousser(v);document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("on",b.dataset.v===v));vues[v]();window.scrollTo(0,0)}
+document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>aller(b.dataset.v));
+$("#home").onclick=()=>aller("accueil");
+window.addEventListener("popstate",e=>aller(e.state&&vues[e.state.v]?e.state.v:"accueil",false));
+try{history.replaceState({v:"accueil"},"")}catch(e){}
+aller("accueil",false);
+</script>
+</body>
+</html>
